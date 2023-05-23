@@ -7,9 +7,14 @@
 
 import SwiftUI
 import CoreData
+import MediaPlayer
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
+
+    @State private var song: MPMediaItem? = nil
+    @State private var songs: [MPMediaItem] = []
+    @State private var updateView: Bool = false
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
@@ -17,10 +22,32 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
 
     var body: some View {
-        Button(action: {
-            getAllSongs()
-        }) {
-            Text("Get All Songs")
+        VStack {
+            Button(action: {
+                getAllSongs() { items in
+//                    let items = items.filter { $0.assetURL != nil }
+                    songs = items
+                    song = songs[0]
+                    print("song: \(song?.title!) \(song?.assetURL)")
+                    updateView.toggle() // manually trigger a view update
+                }
+            }) {
+                Text("Get All Songs")
+            }
+        }
+        if let song = song, let url = song.assetURL {
+            AudioPlayerView(
+                url: .constant(url),
+                image: song.artwork?.image(at: CGSize(width: 200, height: 200)).flatMap {
+                    $0.pngData()?.base64EncodedString()
+                },
+                date: .constant(song.releaseDate?.description ?? ""),
+                isLive: .constant(false),
+                title: song.title ?? "",
+                artist: song.artist ?? ""
+            )
+        } else {
+            Text("No song selected.")
         }
         NavigationView {
             List {
@@ -44,6 +71,11 @@ struct ContentView: View {
                 }
             }
             Text("Select an item")
+            if updateView, let song = song, let _ = song.assetURL {
+                // ...
+            } else {
+                // ...
+            }
         }
     }
 
