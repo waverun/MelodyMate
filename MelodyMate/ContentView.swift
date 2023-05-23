@@ -28,7 +28,7 @@ struct ContentView: View {
 //                    let items = items.filter { $0.assetURL != nil }
                     songs = items
                     song = songs[1]
-                    print("song: \(song?.title!) \(song?.assetURL)")
+                    print("song: \(song?.title!) \(song?.artist)")
                     updateView.toggle() // manually trigger a view update
                 }
             }) {

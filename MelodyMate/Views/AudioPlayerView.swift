@@ -34,6 +34,8 @@ struct AudioPlayerView: View {
         self.title = title
         self.artist = artist
         self.onAppearAction = onAppearAction
+//        heading = title + "/n" + artist
+//        print("heading: \(heading)")
         gAudioPlayerView = self
     }
 
@@ -45,8 +47,11 @@ struct AudioPlayerView: View {
                     VStack {
                         Spacer()
                             .frame(height: 50) // Adjust the height value as needed
-
-                        Text(heading)
+                        Text(title)
+                            .font(.system(size: 24)) // Adjust the size value as needed
+                            .bold()
+                            .multilineTextAlignment(.center)
+                        Text(artist)
                             .font(.system(size: 24)) // Adjust the size value as needed
                             .bold()
                             .multilineTextAlignment(.center)
