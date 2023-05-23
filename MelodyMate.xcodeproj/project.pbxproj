@@ -14,6 +14,15 @@
 		50B8472E2A1CCC970002007A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B8472D2A1CCC970002007A /* Persistence.swift */; };
 		50B847312A1CCC970002007A /* MelodyMate.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 50B8472F2A1CCC970002007A /* MelodyMate.xcdatamodeld */; };
 		50B8473B2A1CEAF30002007A /* getAllSongs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B8473A2A1CEAF30002007A /* getAllSongs.swift */; };
+		50B8473E2A1CFB3F0002007A /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B8473D2A1CFB3F0002007A /* AudioPlayerView.swift */; };
+		50B847402A1CFB6F0002007A /* AuidoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B8473F2A1CFB6F0002007A /* AuidoPlayer.swift */; };
+		50B847432A1CFC740002007A /* RouteChangeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B847422A1CFC740002007A /* RouteChangeHandler.swift */; };
+		50B847452A1CFCD50002007A /* selectAudioOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B847442A1CFCD50002007A /* selectAudioOutput.swift */; };
+		50B847492A1CFDD20002007A /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B847482A1CFDD20002007A /* ImageLoader.swift */; };
+		50B8474C2A1CFE3A0002007A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B8474B2A1CFE3A0002007A /* String.swift */; };
+		50B8474E2A1CFEB60002007A /* checkMemoryAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B8474D2A1CFEB60002007A /* checkMemoryAvailability.swift */; };
+		50B847502A1CFF2B0002007A /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B8474F2A1CFF2B0002007A /* Double.swift */; };
+		50B847522A1CFFCA0002007A /* ImageBrightness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B847512A1CFFCA0002007A /* ImageBrightness.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +34,15 @@
 		50B8472D2A1CCC970002007A /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		50B847302A1CCC970002007A /* MelodyMate.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MelodyMate.xcdatamodel; sourceTree = "<group>"; };
 		50B8473A2A1CEAF30002007A /* getAllSongs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllSongs.swift; sourceTree = "<group>"; };
+		50B8473D2A1CFB3F0002007A /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
+		50B8473F2A1CFB6F0002007A /* AuidoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuidoPlayer.swift; sourceTree = "<group>"; };
+		50B847422A1CFC740002007A /* RouteChangeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteChangeHandler.swift; sourceTree = "<group>"; };
+		50B847442A1CFCD50002007A /* selectAudioOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectAudioOutput.swift; sourceTree = "<group>"; };
+		50B847482A1CFDD20002007A /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		50B8474B2A1CFE3A0002007A /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		50B8474D2A1CFEB60002007A /* checkMemoryAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkMemoryAvailability.swift; sourceTree = "<group>"; };
+		50B8474F2A1CFF2B0002007A /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		50B847512A1CFFCA0002007A /* ImageBrightness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBrightness.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +75,10 @@
 		50B847232A1CCC940002007A /* MelodyMate */ = {
 			isa = PBXGroup;
 			children = (
+				50B847412A1CFB840002007A /* Classes */,
+				50B8474A2A1CFE230002007A /* Extensions */,
 				50B847392A1CEAB20002007A /* Functions */,
+				50B8473C2A1CFB1E0002007A /* Views */,
 				50B847242A1CCC940002007A /* MelodyMateApp.swift */,
 				50B847262A1CCC940002007A /* ContentView.swift */,
 				50B847282A1CCC970002007A /* Assets.xcassets */,
@@ -80,8 +101,38 @@
 			isa = PBXGroup;
 			children = (
 				50B8473A2A1CEAF30002007A /* getAllSongs.swift */,
+				50B847442A1CFCD50002007A /* selectAudioOutput.swift */,
+				50B8474D2A1CFEB60002007A /* checkMemoryAvailability.swift */,
 			);
 			path = Functions;
+			sourceTree = "<group>";
+		};
+		50B8473C2A1CFB1E0002007A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				50B8473D2A1CFB3F0002007A /* AudioPlayerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		50B847412A1CFB840002007A /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				50B8473F2A1CFB6F0002007A /* AuidoPlayer.swift */,
+				50B847422A1CFC740002007A /* RouteChangeHandler.swift */,
+				50B847482A1CFDD20002007A /* ImageLoader.swift */,
+				50B847512A1CFFCA0002007A /* ImageBrightness.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		50B8474A2A1CFE230002007A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				50B8474B2A1CFE3A0002007A /* String.swift */,
+				50B8474F2A1CFF2B0002007A /* Double.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,9 +206,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				50B8473B2A1CEAF30002007A /* getAllSongs.swift in Sources */,
+				50B8474C2A1CFE3A0002007A /* String.swift in Sources */,
 				50B847312A1CCC970002007A /* MelodyMate.xcdatamodeld in Sources */,
+				50B847492A1CFDD20002007A /* ImageLoader.swift in Sources */,
+				50B847502A1CFF2B0002007A /* Double.swift in Sources */,
+				50B8473E2A1CFB3F0002007A /* AudioPlayerView.swift in Sources */,
+				50B847402A1CFB6F0002007A /* AuidoPlayer.swift in Sources */,
+				50B8474E2A1CFEB60002007A /* checkMemoryAvailability.swift in Sources */,
 				50B8472E2A1CCC970002007A /* Persistence.swift in Sources */,
+				50B847452A1CFCD50002007A /* selectAudioOutput.swift in Sources */,
 				50B847272A1CCC940002007A /* ContentView.swift in Sources */,
+				50B847432A1CFC740002007A /* RouteChangeHandler.swift in Sources */,
+				50B847522A1CFFCA0002007A /* ImageBrightness.swift in Sources */,
 				50B847252A1CCC940002007A /* MelodyMateApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
