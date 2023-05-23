@@ -13,6 +13,7 @@
 		50B8472C2A1CCC970002007A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50B8472B2A1CCC970002007A /* Preview Assets.xcassets */; };
 		50B8472E2A1CCC970002007A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B8472D2A1CCC970002007A /* Persistence.swift */; };
 		50B847312A1CCC970002007A /* MelodyMate.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 50B8472F2A1CCC970002007A /* MelodyMate.xcdatamodeld */; };
+		50B8473B2A1CEAF30002007A /* getAllSongs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B8473A2A1CEAF30002007A /* getAllSongs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		50B8472B2A1CCC970002007A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		50B8472D2A1CCC970002007A /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		50B847302A1CCC970002007A /* MelodyMate.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MelodyMate.xcdatamodel; sourceTree = "<group>"; };
+		50B8473A2A1CEAF30002007A /* getAllSongs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllSongs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 		50B847232A1CCC940002007A /* MelodyMate */ = {
 			isa = PBXGroup;
 			children = (
+				50B847392A1CEAB20002007A /* Functions */,
 				50B847242A1CCC940002007A /* MelodyMateApp.swift */,
 				50B847262A1CCC940002007A /* ContentView.swift */,
 				50B847282A1CCC970002007A /* Assets.xcassets */,
@@ -71,6 +74,14 @@
 				50B8472B2A1CCC970002007A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		50B847392A1CEAB20002007A /* Functions */ = {
+			isa = PBXGroup;
+			children = (
+				50B8473A2A1CEAF30002007A /* getAllSongs.swift */,
+			);
+			path = Functions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50B8473B2A1CEAF30002007A /* getAllSongs.swift in Sources */,
 				50B847312A1CCC970002007A /* MelodyMate.xcdatamodeld in Sources */,
 				50B8472E2A1CCC970002007A /* Persistence.swift in Sources */,
 				50B847272A1CCC940002007A /* ContentView.swift in Sources */,

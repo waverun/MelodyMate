@@ -17,6 +17,11 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
 
     var body: some View {
+        Button(action: {
+            getAllSongs()
+        }) {
+            Text("Get All Songs")
+        }
         NavigationView {
             List {
                 ForEach(items) { item in
