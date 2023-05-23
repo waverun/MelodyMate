@@ -24,21 +24,10 @@ func getAllSongs(completion: @escaping ( _ : [MPMediaItem]) -> Void) {
 
     if status == .authorized {
         getItems()
-//        let query = MPMediaQuery.songs()
-//        let items = query.items
-//        print("items: \(items!)")
-//        completion(items ?? [])
-        // Now you can handle the array of MPMediaItem objects.
     } else if status == .notDetermined {
         MPMediaLibrary.requestAuthorization { (newStatus) in
             if newStatus == .authorized {
                 getItems()
-////                let query = MPMediaQuery.songs()
-////                let items = query.items
-//                let query = MPMediaQuery.songs()
-//                print("items: \(query.items!)")
-//                completion(query.items ?? [])
-//                // Now you can handle the array of MPMediaItem objects.
             }
         }
     } else {

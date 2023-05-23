@@ -14,7 +14,8 @@ struct ContentView: View {
 
     @State private var song: MPMediaItem? = nil
     @State private var songs: [MPMediaItem] = []
-    @State private var updateView: Bool = false
+//    @State private var updateView: Bool = false
+    @State private var isLoading = true
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
@@ -23,79 +24,61 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            Button(action: {
-                getAllSongs() { items in
-//                    let items = items.filter { $0.assetURL != nil }
-                    songs = items
-                    song = songs[1]
-                    print("song: \(song?.title!) \(song?.artist)")
-                    updateView.toggle() // manually trigger a view update
-                }
-            }) {
-                Text("Get All Songs")
-            }
-        }
-        NavigationView {
-            List {
-                ForEach(songs.indices, id: \.self) { index in
-                    let song = songs[index]
-                    NavigationLink(destination:
-                        Group {
-                            if let url = song.assetURL {
-                                AudioPlayerView(
-                                    url: .constant(url),
-                                    image: song.artwork?.image(at: CGSize(width: 200, height: 200)), //.flatMap {
-                                    date: .constant(song.releaseDate?.description ?? ""),
-                                    isLive: .constant(false),
-                                    title: song.title ?? "",
-                                    artist: song.artist ?? ""
-                                )
-                            } else {
-                                Text("No song selected.")
+            NavigationView {
+                Group {
+                    if isLoading {
+                        ProgressView("Loading songs...")
+                    } else {
+                        List {
+                            ForEach(songs.indices, id: \.self) { index in
+                                let song = songs[index]
+                                NavigationLink(destination:
+                                                Group {
+                                    if let url = song.assetURL {
+                                        AudioPlayerView(
+                                            url: .constant(url),
+                                            image: song.artwork?.image(at: CGSize(width: 200, height: 200)),
+                                            date: .constant(song.releaseDate?.description ?? ""),
+                                            isLive: .constant(false),
+                                            title: song.title ?? "",
+                                            artist: song.artist ?? ""
+                                        )
+                                    } else {
+                                        Text("No song selected.")
+                                    }
+                                }
+                                ) {
+                                    Text(song.title ?? "Unknown Title")
+                                }
                             }
+                            .onDelete(perform: deleteItems)
                         }
-                    ) {
-                        Text(song.title ?? "Unknown Title")
                     }
                 }
-                //                ForEach(songs) { song in
-                //                    NavigationLink(value: song?.title) {
-                //                        if let song = song, let url = song.assetURL {
-                //                            AudioPlayerView(
-                //                                url: .constant(url),
-                //                                image: song.artwork?.image(at: CGSize(width: 200, height: 200)), //.flatMap {
-                //                                date: .constant(song.releaseDate?.description ?? ""),
-                //                                isLive: .constant(false),
-                //                                title: song.title ?? "",
-                //                                artist: song.artist ?? ""
-                //                            )
-                //                        } else {
-                //                            Text("No song selected.")
-                //                        }
-                //                        //                    NavigationLink {
-                //                        ////                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                //                        //                    } label: {
-                //                        ////                        Text(item.timestamp!, formatter: itemFormatter)
-                //                        //                    }
-                //                    }
-                //                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                .onAppear {
+                    getAllSongs() { items in
+                        songs = items
+                        song = songs[1]
+//                        updateView.toggle() // manually trigger a view update
+                        isLoading = false
                     }
                 }
-            }
-            Text("Select an item")
-            if updateView, let song = song, let _ = song.assetURL {
-                // ...
-            } else {
-                // ...
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        EditButton()
+                    }
+                    ToolbarItem {
+                        Button(action: addItem) {
+                            Label("Add Item", systemImage: "plus")
+                        }
+                    }
+                }
+//                Text("Select an item")
+//                if updateView, let song = song, let _ = song.assetURL {
+//                    // ...
+//                } else {
+//                    // ...
+//                }
             }
         }
     }
