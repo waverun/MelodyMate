@@ -14,11 +14,11 @@ class AudioPlayer: ObservableObject {
     @Published var shouldUpdateTotalDuration: Bool = true // For stoppting the update when moving the slider.
 
     private var shouldUpdateTime: Bool = true
-    private var albumArt: String?
+    private var albumArt: UIImage?
     private var title, artist: String
     private var isLive: Bool
 
-    init(isLive: Bool, albumArt: String?, title: String, artist: String) {
+    init(isLive: Bool, albumArt: UIImage?, title: String, artist: String) {
         self.isLive = isLive
         self.albumArt = albumArt
         self.title = title
@@ -134,7 +134,7 @@ class AudioPlayer: ObservableObject {
 
         if isNewPlayer {
             Task {
-                await configureNowPlayingInfo(title: title, artist: artist, albumArtURL: albumArt)
+                await configureNowPlayingInfo(title: title, artist: artist, albumArt: albumArt)
             }
         }
 
@@ -151,24 +151,22 @@ class AudioPlayer: ObservableObject {
         MPNowPlayingInfoCenter.default().nowPlayingInfo?[MPNowPlayingInfoPropertyPlaybackRate] = 1
     }
 
-    func configureNowPlayingInfo(title: String, artist: String, albumArtURL: String? = nil) async {
+    func configureNowPlayingInfo(title: String, artist: String, albumArt: UIImage? = nil) async {
         var nowPlayingInfo = [String: Any]()
 
         nowPlayingInfo[MPMediaItemPropertyTitle] = title
         nowPlayingInfo[MPMediaItemPropertyArtist] = artist
 
-        if let albumArtURL = albumArtURL {
-            do {
-                let imageData = try await downloadImageData(from: albumArtURL)
-                let albumArt = imageData == nil ? UIImage(systemName: "antenna.radiowaves.left.and.right") : UIImage(data: imageData!)
+//        if let albumArtURL = albumArt {
+//            do {
+//                let imageData = try await downloadImageData(from: albumArtURL)
+//                let albumArt = imageData == nil ? UIImage(systemName: "antenna.radiowaves.left.and.right") : UIImage(data: imageData!)
                 let artwork = MPMediaItemArtwork(boundsSize: albumArt!.size) { _ in
                     return albumArt!
                 }
                 nowPlayingInfo[MPMediaItemPropertyArtwork] = artwork
-            } catch {
-                print("Error loading album art: \(error)")
-            }
-        }
+//            }
+//        }
 
         nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = player?.currentTime().seconds
 

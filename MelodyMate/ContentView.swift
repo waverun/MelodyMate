@@ -27,7 +27,7 @@ struct ContentView: View {
                 getAllSongs() { items in
 //                    let items = items.filter { $0.assetURL != nil }
                     songs = items
-                    song = songs[0]
+                    song = songs[1]
                     print("song: \(song?.title!) \(song?.assetURL)")
                     updateView.toggle() // manually trigger a view update
                 }
@@ -38,9 +38,9 @@ struct ContentView: View {
         if let song = song, let url = song.assetURL {
             AudioPlayerView(
                 url: .constant(url),
-                image: song.artwork?.image(at: CGSize(width: 200, height: 200)).flatMap {
-                    $0.pngData()?.base64EncodedString()
-                },
+                image: song.artwork?.image(at: CGSize(width: 200, height: 200)), //.flatMap {
+//                    $0.pngData()?.base64EncodedString()
+//                },
                 date: .constant(song.releaseDate?.description ?? ""),
                 isLive: .constant(false),
                 title: song.title ?? "",

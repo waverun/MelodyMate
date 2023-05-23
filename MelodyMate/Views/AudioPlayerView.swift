@@ -14,18 +14,18 @@ struct AudioPlayerView: View {
     @StateObject private var routeChangeHandler = RouteChangeHandler()
 
     @Binding private var audioUrl: URL
-    private var imageSrc: String?
+    private var imageSrc: UIImage?
     @Binding private var heading: String
     @Binding private var isLive: Bool
 
     private var title, artist: String
 
-    @State private var currentImageSrc: String?
+    @State private var albumArt: UIImage?
     @State private var isCurrentlyPlaying = false
 
     let onAppearAction: (() -> Void)?
 
-    init(url: Binding<URL>, image: String?, date: Binding<String>, isLive: Binding<Bool>, title: String, artist: String, onAppearAction: (() -> Void)? = nil) {
+    init(url: Binding<URL>, image: UIImage?, date: Binding<String>, isLive: Binding<Bool>, title: String, artist: String, onAppearAction: (() -> Void)? = nil) {
         self.audioPlayer = AudioPlayer(isLive: isLive.wrappedValue, albumArt: image, title: title, artist: artist)
         _audioUrl = url
         self.imageSrc = image
@@ -50,24 +50,35 @@ struct AudioPlayerView: View {
                             .font(.system(size: 24)) // Adjust the size value as needed
                             .bold()
                             .multilineTextAlignment(.center)
-                        if let imageSrc = currentImageSrc {
-                            if audioUrl.absoluteString.hasPrefix("/") {
-                                AsyncImage(url: imageSrc)
-                                    .frame(width: 240, height: 240)
-                                    .onChange(of: self.imageSrc) { newValue in
-                                        currentImageSrc = newValue
-                                        print("currentImageSrc: \(currentImageSrc ?? "no value")")
-                                    }
-                            }
-                            else {
-                                AsyncImage(url: imageSrc)
+                        if let albumArt = albumArt {
+//                            if let artwork = song.artwork?.image(at: CGSize(width: 200, height: 200)) {
+                            Image(uiImage: albumArt)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 120, height: 120)
+                            } else {
+                                // show a placeholder image when there's no artwork
+                                Image(systemName: "music.note")
+                                    .resizable()
                                     .frame(width: 120, height: 120)
-                                    .onChange(of: self.imageSrc) { newValue in
-                                        currentImageSrc = newValue
-                                        print("currentImageSrc: \(currentImageSrc ?? "no value")")
-                                    }
                             }
-                        }
+//                            if audioUrl.absoluteString.hasPrefix("/") {
+//                                AsyncImage(url: imageSrc)
+//                                    .frame(width: 240, height: 240)
+//                                    .onChange(of: self.imageSrc) { newValue in
+//                                        currentImageSrc = newValue
+//                                        print("currentImageSrc: \(currentImageSrc ?? "no value")")
+//                                    }
+//                            }
+//                            else {
+//                                AsyncImage(url: imageSrc)
+//                                    .frame(width: 120, height: 120)
+//                                    .onChange(of: self.imageSrc) { newValue in
+//                                        currentImageSrc = newValue
+//                                        print("currentImageSrc: \(currentImageSrc ?? "no value")")
+//                                    }
+//                            }
+//                        }
                         HStack {
                             VStack {
                                 HStack {
@@ -156,7 +167,7 @@ struct AudioPlayerView: View {
             .edgesIgnoringSafeArea(.bottom)
         }
         .onAppear {
-            currentImageSrc = imageSrc
+            albumArt = imageSrc
             if let action = onAppearAction {
                 action()
             }
