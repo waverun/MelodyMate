@@ -35,29 +35,50 @@ struct ContentView: View {
                 Text("Get All Songs")
             }
         }
-        if let song = song, let url = song.assetURL {
-            AudioPlayerView(
-                url: .constant(url),
-                image: song.artwork?.image(at: CGSize(width: 200, height: 200)), //.flatMap {
-//                    $0.pngData()?.base64EncodedString()
-//                },
-                date: .constant(song.releaseDate?.description ?? ""),
-                isLive: .constant(false),
-                title: song.title ?? "",
-                artist: song.artist ?? ""
-            )
-        } else {
-            Text("No song selected.")
-        }
         NavigationView {
             List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+                ForEach(songs.indices, id: \.self) { index in
+                    let song = songs[index]
+                    NavigationLink(destination:
+                        Group {
+                            if let url = song.assetURL {
+                                AudioPlayerView(
+                                    url: .constant(url),
+                                    image: song.artwork?.image(at: CGSize(width: 200, height: 200)), //.flatMap {
+                                    date: .constant(song.releaseDate?.description ?? ""),
+                                    isLive: .constant(false),
+                                    title: song.title ?? "",
+                                    artist: song.artist ?? ""
+                                )
+                            } else {
+                                Text("No song selected.")
+                            }
+                        }
+                    ) {
+                        Text(song.title ?? "Unknown Title")
                     }
                 }
+                //                ForEach(songs) { song in
+                //                    NavigationLink(value: song?.title) {
+                //                        if let song = song, let url = song.assetURL {
+                //                            AudioPlayerView(
+                //                                url: .constant(url),
+                //                                image: song.artwork?.image(at: CGSize(width: 200, height: 200)), //.flatMap {
+                //                                date: .constant(song.releaseDate?.description ?? ""),
+                //                                isLive: .constant(false),
+                //                                title: song.title ?? "",
+                //                                artist: song.artist ?? ""
+                //                            )
+                //                        } else {
+                //                            Text("No song selected.")
+                //                        }
+                //                        //                    NavigationLink {
+                //                        ////                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                //                        //                    } label: {
+                //                        ////                        Text(item.timestamp!, formatter: itemFormatter)
+                //                        //                    }
+                //                    }
+                //                }
                 .onDelete(perform: deleteItems)
             }
             .toolbar {
